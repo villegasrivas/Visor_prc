@@ -80,7 +80,7 @@ herramientas: {
             abrirPopup: true // Abre la información tras seleccionar.
         },
         geocodificacion: {
-            enabled: true, // Tiene prioridad sobre la búsqueda de capas si ambas están activas.
+            enabled: true, // Independiente de la búsqueda de capas; ambas pueden estar activas.
             proveedor: "geoapify",
             apiKey: "1553aeb2ba6047ce95d9c8ae8eaa5366", // Clave de navegador: restringir dominios permitidos en Geoapify.
             contexto: "Nueva Imperial, Chile",
@@ -196,6 +196,7 @@ herramientas: {
             minZoom: null, // Zoom mínimo visible; null sin límite.
             maxZoom: null, // Zoom máximo visible; null sin límite.
             opacityControl: false, // Muestra el control de transparencia.
+            opacityTarget: "fill", // "fill": solo relleno de polígonos; "all": relleno y borde (predeterminado si se omite). Puntos y líneas conservan su comportamiento.
             cluster: false, // Agrupa puntos cercanos.
             interactive: false, // Permite interacción con las entidades.
 
@@ -289,6 +290,7 @@ herramientas: {
             minZoom: null, // Zoom mínimo visible; null sin límite.
             maxZoom: null, // Zoom máximo visible; null sin límite.
             opacityControl: false, // Muestra el control de transparencia.
+            opacityTarget: "fill", // "fill": solo relleno de polígonos; "all": relleno y borde (predeterminado si se omite). Puntos y líneas conservan su comportamiento.
             cluster: false, // Agrupa puntos cercanos.
             interactive: true, // Permite interacción con las entidades.
 
@@ -486,6 +488,7 @@ Copie este objeto dentro de appConfig.capas y complete sus valores.
     minZoom: null,                         // Zoom mínimo visible; null sin límite.
     maxZoom: null,                         // Zoom máximo visible; null sin límite.
     opacityControl: true,                  // Muestra el control de transparencia.
+    opacityTarget: "fill", // "fill": solo relleno de polígonos; "all": relleno y borde (predeterminado si se omite). Puntos y líneas conservan su comportamiento.
     cluster: false,                        // Use true solamente en capas de puntos.
     interactive: true,                     // Permite interacción con las entidades.
 

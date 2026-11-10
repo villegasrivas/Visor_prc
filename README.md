@@ -7,9 +7,7 @@ Plantilla reutilizable basada en HTML, CSS, JavaScript, Leaflet y GeoJSON. La pe
 ### Búsqueda de direcciones del PRC
 
 Se configura en `appConfig.herramientas.geocodificacion`, dentro de `config/config.js`.
-`enabled` activa el buscador en el espacio de búsqueda habitual. Tiene prioridad si
-la búsqueda de capas también está activada; al deshabilitarlo se respeta el estado
-de `herramientas.busqueda.enabled`. Los clics y popups de las capas se conservan.
+`enabled` activa direcciones de forma independiente de `herramientas.busqueda.enabled`. Ambos buscadores pueden mostrarse simultáneamente.
 
 Complete `apiKey` con una clave de Geoapify habilitada para uso desde navegador.
 Esta clave será visible en el código y las solicitudes: restrinja los sitios
@@ -283,3 +281,9 @@ Mantenga `desarrollo.validarConfiguracion: true` mientras prepara el visor. Las 
 - **El clustering no funciona:** la capa debe contener geometrías de tipo punto y tener `cluster: true`.
 - **La transparencia parece tener poco efecto:** configure una opacidad inicial suficientemente alta en la simbología y luego ajústela desde el control.
 - **El visor falla al abrir `index.html` directamente:** ejecútelo mediante un servidor local, porque las capas se cargan como archivos externos.
+
+
+## Actualización de búsquedas y opacidad
+El borrador limpia texto, resultados y selección, restaurando aislamiento o contraste.
+`opacityTarget: "fill"` modifica solo relleno de polígonos; `"all"` modifica relleno y borde y es el valor predeterminado si se omite. Puntos y líneas mantienen su comportamiento. `opacityControl` determina si se muestra el control.
+Buscadores independientes, separados por 4 px, con posición automática del control de capas. Se conservan sus activaciones en config.js.

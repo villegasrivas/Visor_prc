@@ -29,15 +29,18 @@ function geocodingResultDetail(result) {
 (function () {
     const config = appConfig.herramientas.geocodificacion;
     if (!config || config.enabled !== true) return;
-    const container = searchInput.parentElement;
+    const searchInput = document.getElementById("address-input");
+    const searchResults = document.getElementById("address-results");
+    const container = document.getElementById("address-container");
+    container.hidden = false;
     container.style.display = "flex";
     searchResults.style.removeProperty("display");
     searchInput.placeholder = "Buscar dirección…";
     searchInput.setAttribute("aria-label", "Buscar dirección en Nueva Imperial");
-    searchInput.setAttribute("aria-controls", "search-results");
+    searchInput.setAttribute("aria-controls", "address-results");
     searchInput.setAttribute("aria-expanded", "false");
     searchInput.setAttribute("enterkeyhint", "search");
-    container.querySelector(".search-icon").hidden = true;
+
     const submit = document.createElement("button");
     const clear = document.createElement("button");
     [submit, clear].forEach(function (button) {
@@ -48,9 +51,7 @@ function geocodingResultDetail(result) {
     submit.textContent = "🔍";
     submit.title = "Buscar dirección";
     submit.setAttribute("aria-label", submit.title);
-    clear.textContent = "×";
-    clear.title = "Limpiar dirección y marcador";
-    clear.setAttribute("aria-label", clear.title);
+    setSearchClearIcon(clear);
     searchResults.setAttribute("aria-live", "polite");
     map.attributionControl.addAttribution('<a href="https://www.geoapify.com/">Powered by Geoapify</a> | <a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors</a>');
     let marker = null;
@@ -58,7 +59,8 @@ function geocodingResultDetail(result) {
     let generation = 0;
 
     function hideResults() {
-        clearSearchResults();
+        searchResults.replaceChildren();
+        searchResults.classList.remove("search-results-visible");
         searchInput.setAttribute("aria-expanded", "false");
     }
 
@@ -197,4 +199,16 @@ function geocodingResultDetail(result) {
             cancel(); hideResults();
         }
     });
+})();
+
+/* Ajusta capas también al abrir resultados, cambiar ancho u ocultar buscadores. */
+(function () {
+    const tools = document.getElementById("search-tools");
+    const mapElement = document.getElementById("map");
+    function positionLayers() {
+        const bottom = tools.offsetTop + tools.offsetHeight + 4;
+        mapElement.style.setProperty("--search-controls-bottom", bottom + "px");
+    }
+    new ResizeObserver(positionLayers).observe(tools);
+    positionLayers();
 })();

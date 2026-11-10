@@ -127,7 +127,7 @@ const layersPanel = document.getElementById("layers-panel");
 [
     layersPanel,
     document.getElementById("open-layers-panel"),
-    document.querySelector(".search-container"),
+    document.getElementById("search-tools"),
     document.getElementById("search-results"),
     document.querySelector(".map-navigation"),
     document.querySelector(".map-tools"),
